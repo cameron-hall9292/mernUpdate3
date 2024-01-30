@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5500;
 //use cors
 app.use(cors(
     {
-        origin: ["https://mern-update3-hnr7-frontend.vercel.app/"],
+        origin: ["https://mern-update3-hnr7-frontend.vercel.app"],
         methods: ["POST","GET", "PUT"],
         credentials: true
     }
