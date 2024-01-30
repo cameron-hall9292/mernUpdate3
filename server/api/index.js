@@ -6,6 +6,18 @@ const cors = require("cors");
 
 const app = express();
 
+//use cors
+app.use(cors(
+    {
+        origin: ["https://mern-update3-hnr7-frontend.vercel.app/"],
+        methods: ["GET","POST","PUT"],
+        credentials: true
+
+    }
+
+    
+));
+
 // use express.json() to get data into json format
 
 app.use(express.json());
@@ -14,8 +26,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5500;
 
-//use cors
-app.use(cors());
+
 
 //Lets import routes
 
