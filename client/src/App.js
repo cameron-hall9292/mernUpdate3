@@ -17,7 +17,7 @@ function App() {
   const addItem = async (e) => {
     e.preventDefault();
     try{
-      const res = await axios.post("mern-update3.vercel.app/api/item",{item: itemText});
+      const res = await axios.post("https://mern-update3.vercel.app/api/item",{item: itemText});
       
       setListItems(prev => [...prev, res.data]);
 
@@ -50,7 +50,7 @@ useEffect(()=>{
 
 const deleteItem = async (id) => {
   try{
-    const res = await axios.delete(`mern-update3.vercel.app/api/item/${id}`)
+    const res = await axios.delete(`https://mern-update3.vercel.app/api/item/${id}`)
     const newListItem = listItems.filter(item => item._id !== id);
     setListItems(newListItem);
   }catch(err){
@@ -63,7 +63,7 @@ const deleteItem = async (id) => {
 const updateItem = async (e) => {
   e.preventDefault();
   try{
-    const res = await axios.put(`mern-update3.vercel.app/api/item/${isUpdating}`, {item: updateItemText });
+    const res = await axios.put(`https://mern-update3.vercel.app//api/item/${isUpdating}`, {item: updateItemText });
 
     console.log(res.data);
     const updatedItemIndex = listItems.findIndex(item => item._id === isUpdating);
