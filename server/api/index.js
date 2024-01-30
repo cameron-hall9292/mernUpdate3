@@ -49,7 +49,13 @@ app.listen(PORT, (err) => {
 )
 
 
-// app.listen(PORT, '0.0.0.0'); // or server.listen(3001, '0.0.0.0'); for all interfaces
-// app.on('listening', function() {
-//     console.log('Express server started on port %s at %s', server.address().port, server.address().address);
-// });
+//Lets create a second route -- get data from DB
+
+router.get('/api/items', async (req,res) => {
+    try {
+        const allTodoItems = await todoItemsModel.find({});
+        res.status(200).json(allTodoItems);
+    }catch(err){
+        res.json(err);
+    }
+});
