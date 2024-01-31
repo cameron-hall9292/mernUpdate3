@@ -6,6 +6,16 @@ const cors = require("cors");
 
 const app = express();
 
+const mongoose = require('mongoose');
+
+//create Schema
+const TodoItemSchema = new mongoose.Schema({
+    item: {
+        type:String,
+        required:true
+    }
+})
+
 
 
 // use express.json() to get data into json format
