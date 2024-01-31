@@ -6,6 +6,8 @@ const cors = require("cors");
 
 const app = express();
 
+const router = require('express').Router();
+
 // use express.json() to get data into json format
 
 app.use(express.json());
@@ -47,6 +49,8 @@ app.use('/', TodoItemRouter)
 // app.get("/", (res, res) => {
 //     res.json("Hello");
 // });
+
+module.exports = router;
 
 
 //add port and connect to server
