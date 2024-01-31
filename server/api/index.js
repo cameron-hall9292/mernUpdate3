@@ -1,56 +1,60 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const router = require('express').Router();
+//import5 todo model
 
-const dotenv = require ('dotenv').config();
-const cors = require("cors");
+const todoItemsModel = require('../models/todoItems')
 
-const app = express();
 
-//use cors
-app.use(cors(
-    {
-        origin: ["https://mern-update3-hnr7-frontend.vercel.app/"],
-        methods: ["GET","POST","PUT"],
-        credentials: true
+//Lets create our first route -- we will ad todo item to our DB
 
+router.post('/api/item', async (req,res)=> {
+    try{
+        const newItem = new todoItemsModel({
+            item: req.body.item
+        });
+        //save this item in DB
+        const saveItem =   await newItem.save()
+        res.status(200).json(saveItem)
+    } catch(err){
+        res.json(err);
     }
-
-    
-));
-
-// use express.json() to get data into json format
-
-app.use(express.json());
-
-//Port
-
-const PORT = process.env.PORT || 5500;
-
-
-
-//Lets import routes
-
-const TodoItemRouter = require('./routes/todoItems');
-
-//Lets connect to mongodb
-
-mongoose.connect(process.env.DB_CONNECT)
-.then(()=> console.log("Database connected"))
-.catch(err => console.log(err));
-
-app.get("/", (req, res) => {
-    res.json("Hello");
 });
 
-app.use('/', TodoItemRouter)
+//Lets create a second route -- get data from DB
+
+router.get('/api/items', async (req,res) => {
+    try {
+        const allTodoItems = await todoItemsModel.find({});
+        res.status(200).json(allTodoItems);
+    }catch(err){
+        res.json(err);
+    }
+});
+
+//Let's update item
+router.put('/api/item/:id', async (req, res)=> {
+    try{
+    const updateItem = await todoItemsModel.findByIdAndUpdate(req.params.id, {$set: req.body});
+    res.status(200).json('Item updated');
+    }catch(err){
+        res.json(err);
+    }
 
 
-//add port and connect to server
+});
+
+//Let's update item
+router.delete('/api/item/:id', async (req, res)=> {
+    try{
+    const updateItem = await todoItemsModel.findByIdAndDelete(req.params.id, {$set: req.body});
+    res.status(200).json('Item deleted');
+    }catch(err){
+        res.json(err);
+    }
 
 
-app.listen(PORT, (err) => {
-    if (err) console.log(err); else console.log('Server is running on port:', PORT);}
-)
+})
 
 
+//export router
 
+module.exports = router;
