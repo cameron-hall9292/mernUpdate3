@@ -21,6 +21,11 @@ app.use(cors());
 
 const TodoItemRouter = require('./routes/todoItems');
 
+app.get("/",(req,res){
+    res.json("hello");
+})
+
+
 //Lets connect to mongodb
 
 mongoose.connect(process.env.DB_CONNECT)
