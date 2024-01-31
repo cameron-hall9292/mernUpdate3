@@ -27,9 +27,9 @@ mongoose.connect(process.env.DB_CONNECT)
 .then(()=> console.log("Database connected"))
 .catch(err => console.log(err));
 
-app.get(req,res){
+app.get("/",(req,res){
     res.json("hello");
-}
+})
 
 app.use('/', TodoItemRouter)
 
