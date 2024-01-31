@@ -35,7 +35,7 @@ mongoose.connect(process.env.DB_CONNECT)
 .then(()=> console.log("Database connected"))
 .catch(err => console.log(err));
 
-app.get('/api/items', async (req,res) => {
+app.get('/', async (req,res) => {
     try {
         const allTodoItems = await todoItemsModel.find({});
         res.status(200).json(allTodoItems);
