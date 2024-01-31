@@ -27,8 +27,19 @@ mongoose.connect(process.env.DB_CONNECT)
 .then(()=> console.log("Database connected"))
 .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-    res.json("Hello");
+// app.get("/", (req, res) => {
+//     res.json("Hello");
+// });
+
+const todoItemsModel = require('../models/todoItems')
+
+app.get('/api/items', async (req,res) => {
+    try {
+        const allTodoItems = await todoItemsModel.find({});
+        res.status(200).json(allTodoItems);
+    }catch(err){
+        res.json(err);
+    }
 });
 
 app.use('/', TodoItemRouter)
