@@ -6,9 +6,7 @@ const cors = require("cors");
 
 const app = express();
 
-const router = require('express').Router();
 
-const todoItemsModel = require('../models/todoItems')
 
 // use express.json() to get data into json format
 
@@ -37,7 +35,7 @@ mongoose.connect(process.env.DB_CONNECT)
 
 const todoItemsModel = require('../models/todoItems')
 
-app.get('/api/items', async (req,res) => {
+app.get( async (req,res) => {
     try {
         const allTodoItems = await todoItemsModel.find({});
         res.status(200).json(allTodoItems);
@@ -52,7 +50,6 @@ app.use('/', TodoItemRouter)
 //     res.json("Hello");
 // });
 
-module.exports = router;
 
 
 //add port and connect to server
