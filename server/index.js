@@ -25,6 +25,8 @@ const router = require('express').Router();
 
 const TodoItemRouter = require('./routes/todoItems');
 
+app.use('/', TodoItemRouter)
+
 app.get("/",(req,res) => {
     res.json("hello");
 })
@@ -44,7 +46,7 @@ router.get('/api/items', async (req,res) => {
         res.json(err);
     }
 });
-app.use('/', TodoItemRouter)
+
 
 
 //add port and connect to server
