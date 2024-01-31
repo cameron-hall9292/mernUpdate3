@@ -8,6 +8,8 @@ const app = express();
 
 const router = require('express').Router();
 
+const todoItemsModel = require('../models/todoItems')
+
 // use express.json() to get data into json format
 
 app.use(express.json());
