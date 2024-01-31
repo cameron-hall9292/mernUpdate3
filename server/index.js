@@ -29,6 +29,15 @@ mongoose.connect(process.env.DB_CONNECT)
 
 app.use('/', TodoItemRouter)
 
+router.get('/api/items', async (req,res) => {
+    try {
+        const allTodoItems = await todoItemsModel.find({});
+        res.status(200).json(allTodoItems);
+    }catch(err){
+        res.json(err);
+    }
+});
+
 
 //add port and connect to server
 
