@@ -24,7 +24,6 @@ router.post('/api/item', async (req,res)=> {
 router.get('/api/items', async (req,res) => {
     try {
         const allTodoItems = await todoItemsModel.find({});
-        res.setHeader("Access-Control-Allow-Origin", "*");
         res.status(200).json(allTodoItems);
      
     }catch(err){
