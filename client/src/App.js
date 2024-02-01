@@ -36,7 +36,7 @@ function App() {
 useEffect(()=>{
   const getItemsList = async () => {
     try{
-      const res = await axios.get("https://mern-update3.vercel.app/api/items");
+      const res = await axios.get("https://api.vercel.com/api/items");
       setListItems(res.data);
       console.log('render');
     }catch(err){
