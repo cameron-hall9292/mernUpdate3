@@ -17,9 +17,9 @@ const PORT = process.env.PORT || 5500;
 //use cors
 app.use(cors());
 
-app.get("/",(req,res) => {
-    res.json("hello");
-})
+// app.get("/",(req,res) => {
+//     res.json("hello");
+// })
 
 
 //Lets import routes
