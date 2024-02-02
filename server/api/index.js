@@ -1,60 +1,49 @@
-const router = require('express').Router();
-//import5 todo model
+const express = require('express');
+const mongoose = require('mongoose');
 
-const todoItemsModel = require('../models/todoItems')
+const dotenv = require ('dotenv').config();
+const cors = require("cors");
 
+const app = express();
 
-//Lets create our first route -- we will ad todo item to our DB
+// use express.json() to get data into json format
 
-router.post('/api/item', async (req,res)=> {
-    try{
-        const newItem = new todoItemsModel({
-            item: req.body.item
-        });
-        //save this item in DB
-        const saveItem =   await newItem.save()
-        res.status(200).json(saveItem)
-    } catch(err){
-        res.json(err);
-    }
-});
+app.use(express.json());
 
-//Lets create a second route -- get data from DB
+//Port
 
-router.get('/api/items', async (req,res) => {
-    try {
-        const allTodoItems = await todoItemsModel.find({});
-        res.status(200).json(allTodoItems);
-    }catch(err){
-        res.json(err);
-    }
-});
+const PORT = process.env.PORT || 5500;
 
-//Let's update item
-router.put('/api/item/:id', async (req, res)=> {
-    try{
-    const updateItem = await todoItemsModel.findByIdAndUpdate(req.params.id, {$set: req.body});
-    res.status(200).json('Item updated');
-    }catch(err){
-        res.json(err);
-    }
+//use cors
+app.use(cors());
 
-
-});
-
-//Let's update item
-router.delete('/api/item/:id', async (req, res)=> {
-    try{
-    const updateItem = await todoItemsModel.findByIdAndDelete(req.params.id, {$set: req.body});
-    res.status(200).json('Item deleted');
-    }catch(err){
-        res.json(err);
-    }
-
-
+app.get("/",(req,res) => {
+    res.json("hello");
 })
 
 
-//export router
+//Lets import routes
 
-module.exports = router;
+const TodoItemRouter = require('./routes/todoItems');
+
+//Lets connect to mongodb
+
+mongoose.connect(process.env.DB_CONNECT)
+.then(()=> console.log("Database connected"))
+.catch(err => console.log(err));
+
+app.use('/', TodoItemRouter)
+
+
+//add port and connect to server
+
+
+app.listen(PORT, (err) => {
+    if (err) console.log(err); else console.log('Server is running on port:', PORT);}
+)
+
+
+// app.listen(PORT, '0.0.0.0'); // or server.listen(3001, '0.0.0.0'); for all interfaces
+// app.on('listening', function() {
+//     console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+// });
