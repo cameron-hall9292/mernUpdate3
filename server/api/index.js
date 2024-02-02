@@ -24,7 +24,7 @@ app.get("/",(req,res) => {
 
 //Lets import routes
 
-const TodoItemRouter = require('./routes/todoItems');
+const TodoItemRouter = require('../routes/todoItems');
 
 //Lets connect to mongodb
 
