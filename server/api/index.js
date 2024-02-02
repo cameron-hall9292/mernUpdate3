@@ -32,7 +32,9 @@ mongoose.connect(process.env.DB_CONNECT)
 .then(()=> console.log("Database connected"))
 .catch(err => console.log(err));
 
-app.use('/', TodoItemRouter)
+app.use('/', TodoItemRouter);
+
+module.exports = app;
 
 
 //add port and connect to server
