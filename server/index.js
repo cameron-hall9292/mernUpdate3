@@ -21,6 +21,15 @@ const PORT = process.env.PORT || 5500;
 app.use(cors());
 
 
+app.get('/api/items', async (req,res) => {
+    try {
+        const allTodoItems = await todoItemsModel.find({});
+        res.status(200).json(allTodoItems);
+    }catch(err){
+        res.json(err);
+    }
+});
+
 
 
 //Lets import routes
@@ -36,14 +45,6 @@ mongoose.connect(process.env.DB_CONNECT)
 
 
 
-app.get('/api/items', async (req,res) => {
-    try {
-        const allTodoItems = await todoItemsModel.find({});
-        res.status(200).json(allTodoItems);
-    }catch(err){
-        res.json(err);
-    }
-});
 
 //app.use('/', TodoItemRouter)
 
@@ -57,7 +58,7 @@ app.listen(PORT, (err) => {
 
 //export app
 
-module.exports = app;
+
 
 
 // app.listen(PORT, '0.0.0.0'); // or server.listen(3001, '0.0.0.0'); for all interfaces
