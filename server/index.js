@@ -37,6 +37,10 @@ app.listen(PORT, (err) => {
     if (err) console.log(err); else console.log('Server is running on port:', PORT);}
 )
 
+//export app
+
+module.exports = app;
+
 
 // app.listen(PORT, '0.0.0.0'); // or server.listen(3001, '0.0.0.0'); for all interfaces
 // app.on('listening', function() {
