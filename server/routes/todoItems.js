@@ -3,6 +3,10 @@ const router = require('express').Router();
 
 const todoItemsModel = require('../models/todoItems')
 
+router.get('/',  (req,res) => {
+    res.json("Hello");
+}
+
 
 //Lets create our first route -- we will ad todo item to our DB
 
