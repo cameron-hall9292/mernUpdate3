@@ -36,7 +36,7 @@ mongoose.connect(process.env.DB_CONNECT)
 
 
 
-router.get('/api/items', async (req,res) => {
+app.get('/api/items', async (req,res) => {
     try {
         const allTodoItems = await todoItemsModel.find({});
         res.status(200).json(allTodoItems);
