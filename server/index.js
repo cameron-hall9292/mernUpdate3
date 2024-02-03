@@ -42,7 +42,7 @@ app.listen(PORT, (err) => {
 
 //export app
 
-
+module.exports = app;
 
 
 // app.listen(PORT, '0.0.0.0'); // or server.listen(3001, '0.0.0.0'); for all interfaces
